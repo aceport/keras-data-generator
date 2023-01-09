@@ -1,8 +1,9 @@
 import numpy as np
-import keras
+from tensorflow.keras.utils import Sequence
+import tensorflow as tf
 
 
-class DataGenerator(keras.utils.Sequence):
+class DataGenerator(Sequence):
     'Generates data for Keras'
     def __init__(self, list_IDs, labels, batch_size=32, dim=(32,32,32), n_channels=1,
                  n_classes=10, shuffle=True):
@@ -53,4 +54,4 @@ class DataGenerator(keras.utils.Sequence):
             # Store class
             y[i] = self.labels[ID]
 
-        return X, keras.utils.to_categorical(y, num_classes=self.n_classes)
+        return X, tf.keras.utils.to_categorical(y, num_classes=self.n_classes)
